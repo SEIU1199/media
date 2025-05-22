@@ -1,0 +1,17 @@
+<!-- viewer.html -->
+<!DOCTYPE html>
+<html>
+<head><title>PDF Viewer</title></head>
+<body>
+<iframe id="pdf" style="width:100vw; height:100vh;"></iframe>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const b64 = params.get("b64");
+  if (b64) {
+    const blob = new Blob([Uint8Array.from(atob(b64), c => c.charCodeAt(0))], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+    document.getElementById("pdf").src = url;
+  }
+</script>
+</body>
+</html>
